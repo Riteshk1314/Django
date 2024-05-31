@@ -41,7 +41,6 @@ class store(models.Model):
     name= models.CharField(max_length=100)
     location= models.CharField(max_length=100)
     chai_varieties=models.ManyToManyField(ChaiVariety, related_name='stores')
-    
     def __str__(self):
        return self.name
   

@@ -13,10 +13,12 @@ class ChaiVarietyAdmin(admin.ModelAdmin):
     
 class StoreAdmin(admin.ModelAdmin):
     list_display=('name','location')
-    filter_horizontal=('chai_varities')
+    filter_horizontal=('chai_varieties',)
     
 class certificateAdmin(admin.ModelAdmin):
-    list_display=('name','location')
+    list_display=('name','location',)
     
     
-admin.site.register(ChaiVariety)
+admin.site.register(ChaiVariety,ChaiVarietyAdmin)
+admin.site.register(store,StoreAdmin)
+admin.site.register(certificate,certificateAdmin)
