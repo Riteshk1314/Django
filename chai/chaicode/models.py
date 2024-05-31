@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth import User
-# Create your models here.
+from django.contrib.auth.models import User# Create your models here.
 from django.db import models
 from django.utils import timezone
+from django.contrib import admin
 
 # Create your models here.
 
@@ -34,4 +34,25 @@ class ChaiReview(models.Model):
 
     def __str__(self):
         return f'{self.user.username} review for {self.chai.name}'
+    
+
+#many to many 
+class store(models.Model):
+    name= models.CharField(max_length=100)
+    location= models.CharField(max_length=100)
+    chai_varieties=models.ManyToManyField(ChaiVariety, related_name='stores')
+    
+    def __str__(self):
+       return self.name
+  
+  
+#one to one 
+class certificate(models.Model):
+    chai= models.OneToOneField(ChaiVariety, on_delete=models.CASCADE, related_name='CERTIFICATE')
+    certificate_number=models.CharField(max_length=100)
+    issued_date=models.DateTimeField(default=timezone.now)
+    valid_until= models.DateTimeField
+    
+    def __str__(self):
+       return f'Certificate for {self.name.chai}'
     
