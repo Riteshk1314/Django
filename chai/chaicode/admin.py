@@ -16,7 +16,7 @@ class StoreAdmin(admin.ModelAdmin):
     filter_horizontal=('chai_varieties',)
     
 class certificateAdmin(admin.ModelAdmin):
-    list_display=('name','location',)
+    list_display=('date',)
     
     
 admin.site.register(ChaiVariety,ChaiVarietyAdmin)

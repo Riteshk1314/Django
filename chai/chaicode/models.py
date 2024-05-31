@@ -49,7 +49,7 @@ class store(models.Model):
 class certificate(models.Model):
     chai= models.OneToOneField(ChaiVariety, on_delete=models.CASCADE, related_name='CERTIFICATE')
     certificate_number=models.CharField(max_length=100)
-    issued_date=models.DateTimeField(default=timezone.now)
+    date=models.DateTimeField(default=timezone.now)
     valid_until= models.DateTimeField
     
     def __str__(self):
