@@ -18,7 +18,7 @@ def chai_store_view(request):
         form=ChaiVarietyForm(request.POST)
         if form.is_valid():
             chai_variety = form.cleaned_data['chai_varity']
-            store.object.filter(chai_varieties=chai_variety)
+            stores=store.object.filter(chai_varieties=chai_variety)
         
     else:
         form=ChaiVarietyForm()
