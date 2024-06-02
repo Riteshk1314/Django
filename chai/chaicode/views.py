@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import ChaiVariety, store
-from .forms import ChaiVarietyForm
+from .models import ChaiVariety, store #getting models 
+from .forms import ChaiVarietyForm #importing forms
 def all_chai(request):
   chais = ChaiVariety.objects.all()
   return render(request, 'website/all_chai.html', {'chais': chais})
@@ -16,10 +16,12 @@ def chai_store_view(request):
     stores=None
     if request.method== 'POST':
         form=ChaiVarietyForm(request.POST)
-    if form.is_valid():
-        chai_variety = form.cleaned_data['chai_variety']
-        store.objects.filter(chai_variety=chai_variety)
+        if form.is_valid():
+            chai_variety = form.cleaned_data['chai_varity']
+            store.object.filter(chai_varieties=chai_variety)
         
+    else:
+        form=ChaiVarietyForm()
         
     
-    return render(request, 'website/chai_stores.html',{'stores':stores})
+    return render(request, 'website/chai_stores.html',{'stores':stores,'form':form})
