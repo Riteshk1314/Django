@@ -13,12 +13,12 @@ def chai_detail(request, chai_id):
 
 
 def chai_store_view(request):
-    stores=None
+    stores = store.objects.all()
     if request.method== 'POST':
         form=ChaiVarietyForm(request.POST)
         if form.is_valid():
             chai_variety = form.cleaned_data['chai_varity']
-            stores=store.object.filter(chai_varieties=chai_variety)
+            stores=store.objects.filter(chai_varieties=chai_variety)
         
     else:
         form=ChaiVarietyForm()
