@@ -12,7 +12,7 @@ class showroomlist(models.Model):
     website=models.URLField(max_length=100)
     
     def __str__(self):
-        return self.name
+        return (self.name)
     
 class carlist(models.Model):
     name= models.CharField(max_length=50)
@@ -20,8 +20,7 @@ class carlist(models.Model):
     description= models.CharField( max_length=50, blank=True, null=True)
     price=models.DecimalField(max_digits=9, decimal_places=2, default=1000)
     chasisnum=models.CharField( max_length= 50  ,blank=True,validators=[alphanumeric])
-    
-    
+    showroom= models.ForeignKey(showroomlist,on_delete=models.CASCADE,related_name='showrooms',null=True)
     def __str__(self):
         return self.name
     

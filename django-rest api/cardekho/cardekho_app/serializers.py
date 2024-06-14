@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from .models import carlist,showroomlist
 
-class showroomSerializer(serializers.ModelSerializer):
+class showroomserializer(serializers.ModelSerializer):
     class Meta:
-        model=carlist
-        fields="__all__"
+        model = showroomlist
+        fields = ['name', 'location', 'website']
+
 
 
 class carserializer(serializers.ModelSerializer):
