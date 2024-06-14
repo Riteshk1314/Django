@@ -1,11 +1,6 @@
 from rest_framework import serializers
 from .models import carlist,showroomlist
 
-class showroomserializer(serializers.ModelSerializer):
-    class Meta:
-        model = showroomlist
-        fields = ['name', 'location', 'website']
-
 
 
 class carserializer(serializers.ModelSerializer):
@@ -44,8 +39,15 @@ class carserializer(serializers.ModelSerializer):
             raise serializers.ValidationError("price is too low ")
         return value
     
-    def validata(self,data):
+    def validate(self,data):
         if data['name']==data['description']:
             raise serializers.ValidationError('name and description must be different ')
         return data
     
+    
+class showroomserializer(serializers.ModelSerializer):
+    showrooms=carserializer(many=True, read_only=True)
+    class Meta:
+        model = showroomlist
+        fields ="__all__"
+
