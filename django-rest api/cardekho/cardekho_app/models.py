@@ -25,9 +25,10 @@ class carlist(models.Model):
     def __str__(self):
         return self.name
     
-class Review(models.Model):
+class review(models.Model):
     rating=models.IntegerField(validators=[MaxValueValidator, MinValueValidator])
     comments=models.CharField( max_length=50)
-    car = models.ForeignKey(carlist,on_delete=models.CASCADE, related_name="reviews",null=True )
+    car = models.ForeignKey(carlist,on_delete=models.CASCADE, related_name="review",null=True )
+    updated = models.DateTimeField(auto_now=True)
     
-    
+    def __str__(self):return str(self.rating)

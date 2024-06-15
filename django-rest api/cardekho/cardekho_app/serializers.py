@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from .models import carlist,showroomlist
+from .models import carlist,showroomlist, review
 
 
 
+
+class reviewserializer(serializers.ModelSerializer):
+    class meta:
+        model=review
+        fields="__all__"
 class carserializer(serializers.ModelSerializer):
     # id=serializers.IntegerField(read_only=True)
     # name=serializers.CharField()
@@ -24,7 +29,7 @@ class carserializer(serializers.ModelSerializer):
     #     instance.save() 
     #     return instance 
     discounted_price=serializers.SerializerMethodField()
-    
+    review= reviewserializer(many=True,read_only=True)    
     class Meta:
         model=carlist
         fields="__all__"
@@ -51,5 +56,3 @@ class showroomserializer(serializers.ModelSerializer):
     class Meta:
         model = showroomlist
         fields ="__all__"
-
-

@@ -1,13 +1,17 @@
 from django.shortcuts import render
-from .models import carlist,showroomlist
+from .models import carlist,showroomlist, review
 from django.http import JsonResponse
 from django.http import HttpResponse
 import json
-from .serializers import carserializer,showroomserializer
+from .serializers import carserializer,showroomserializer, reviewserializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import mixins 
+from rest_framework import generics 
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAdminUser,AllowAny,IsAuthenticated
 # def car_list_view(request):
 #     cars=carlist.objects.all()
 #     data={
@@ -77,9 +81,22 @@ def car_detail_view(request,pk):
         return Response(status=202)
         
     
+class reviewlist(mixins.ListModelMixin, mixins.CreateModelMixin,generics.GenericAPIView):
+    queryset=review.objects.all()
+    serializer_class=reviewserializer
+    
+    def get(self, request,*args, **kwargs):
+        return self.list(request, *args, **kwargs)     
 
+    def post(self, request, *args,**kwargs):
+        return self.create(request, *args, **kwargs)     
 
 class showroom_view(APIView):
+    
+    authentication_classes=[BasicAuthentication]
+    permission_classes=[IsAuthenticated]
+    permission_classes=[IsAdminUser]
+    permission_classes=[AllowAny]    
 
     def get(self,request):
         showroom = showroomlist.objects.all()
