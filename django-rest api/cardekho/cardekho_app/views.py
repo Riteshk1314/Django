@@ -80,6 +80,14 @@ def car_detail_view(request,pk):
         car.delete()
         return Response(status=202)
         
+
+
+class reviewdetail(mixins.RetrieveModelMixin, generics.GenericAPIView ):
+    queryset=review.objects.all()
+    serializer_class=reviewserializer
+    
+    def get(self, request,*args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)     
     
 class reviewlist(mixins.ListModelMixin, mixins.CreateModelMixin,generics.GenericAPIView):
     queryset=review.objects.all()
@@ -93,10 +101,10 @@ class reviewlist(mixins.ListModelMixin, mixins.CreateModelMixin,generics.Generic
 
 class showroom_view(APIView):
     
-    authentication_classes=[BasicAuthentication]
-    permission_classes=[IsAuthenticated]
-    permission_classes=[IsAdminUser]
-    permission_classes=[AllowAny]    
+    # authentication_classes=[BasicAuthentication]
+    # permission_classes=[IsAuthenticated]
+    # permission_classes=[IsAdminUser]
+    # permission_classes=[AllowAny]    
 
     def get(self,request):
         showroom = showroomlist.objects.all()
